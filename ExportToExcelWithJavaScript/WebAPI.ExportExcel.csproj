@@ -92,6 +92,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\home\cadastrar.js" />
+    <Content Include="Scripts\home\exportar.js" />
     <Content Include="Scripts\home\index.js" />
     <Content Include="Scripts\home\listar.js" />
     <Content Include="Scripts\home\shared.js" />
