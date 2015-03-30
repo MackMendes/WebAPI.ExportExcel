@@ -22,6 +22,8 @@ namespace WebAPIExportExcel.Controllers
         public Cliente GetCliente(int idCliente)
         {
             return listCliente.FirstOrDefault(x => x.IdCliente == idCliente);
+            
+            
         }
 
         [HttpPut]
@@ -81,6 +83,32 @@ namespace WebAPIExportExcel.Controllers
 
             listCliente.Remove(cliente);
             return Request.CreateResponse(HttpStatusCode.OK, cliente);
+        }
+        
+        public JsonResult DownloadExcel(IEnumerable<Cliente> listCliente)
+        {
+            var encodeBase64 = "";
+
+            StringBuilder str = new StringBuilder();
+            str.Append("<table border=`" + "1px" + "`b>");
+            str.Append("<tr>");
+            str.Append("<td><b><font face=Arial Narrow size=3>ID Cliente</font></b></td>");
+            str.Append("<td><b><font face=Arial Narrow size=3>Nome</font></b></td>");
+            str.Append("<td><b><font face=Arial Narrow size=3>Idade</font></b></td>");
+            str.Append("</tr>");
+            foreach (var item in listCliente)
+            {
+                str.Append("<tr>");
+                str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + item.IdCliente.ToString() + "</font></td>");
+                str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + item.Nome.ToString() + "</font></td>");
+                str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + item.Idade.ToString() + "</font></td>");
+                str.Append("</tr>");
+            }
+            str.Append("</table>");
+            byte[] temp = System.Text.Encoding.UTF8.GetBytes(str.ToString());
+            encodeBase64 = System.Convert.ToBase64String(temp);
+
+            return Json(temp);
         }
     }
 }
