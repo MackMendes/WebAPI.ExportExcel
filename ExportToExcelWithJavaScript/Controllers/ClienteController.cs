@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using WebAPIExportExcel.Models;
 
@@ -84,31 +85,34 @@ namespace WebAPIExportExcel.Controllers
             listCliente.Remove(cliente);
             return Request.CreateResponse(HttpStatusCode.OK, cliente);
         }
-        
-        public JsonResult DownloadExcel(IEnumerable<Cliente> listCliente)
-        {
-            var encodeBase64 = "";
 
+        [HttpGet]
+        public string DownloadExcel()
+        {
+            return BuildeExcel();
+        }
+
+        private string BuildeExcel()
+        {
             StringBuilder str = new StringBuilder();
             str.Append("<table border=`" + "1px" + "`b>");
             str.Append("<tr>");
             str.Append("<td><b><font face=Arial Narrow size=3>ID Cliente</font></b></td>");
             str.Append("<td><b><font face=Arial Narrow size=3>Nome</font></b></td>");
-            str.Append("<td><b><font face=Arial Narrow size=3>Idade</font></b></td>");
+            str.Append("<td><b><font face=Arial Narrow size=3>E-mail</font></b></td>");
             str.Append("</tr>");
             foreach (var item in listCliente)
             {
                 str.Append("<tr>");
                 str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + item.IdCliente.ToString() + "</font></td>");
                 str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + item.Nome.ToString() + "</font></td>");
-                str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + item.Idade.ToString() + "</font></td>");
+                str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + item.Email.ToString() + "</font></td>");
                 str.Append("</tr>");
             }
             str.Append("</table>");
             byte[] temp = System.Text.Encoding.UTF8.GetBytes(str.ToString());
-            encodeBase64 = System.Convert.ToBase64String(temp);
+            return System.Convert.ToBase64String(temp);
 
-            return Json(temp);
         }
     }
 }
