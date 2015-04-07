@@ -23,8 +23,6 @@ namespace WebAPIExportExcel.Controllers
         public Cliente GetCliente(int idCliente)
         {
             return listCliente.FirstOrDefault(x => x.IdCliente == idCliente);
-            
-            
         }
 
         [HttpPut]
