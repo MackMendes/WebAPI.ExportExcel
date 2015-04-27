@@ -15,8 +15,8 @@
         createA.setAttribute('id', 'linkDownload');
         createA.setAttribute('href', 'data:application/vnd.ms-excel;base64,' + data);
         document.body.appendChild(createA);
-        createA.download = 'download_teste.xls';
 
+        createA.download = 'download_teste.xls';
         var selectorHref = document.getElementById('linkDownload');
         selectorHref.click();
         selectorHref.remove();
