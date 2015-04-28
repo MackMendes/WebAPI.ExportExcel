@@ -92,23 +92,23 @@ namespace WebAPIExportExcel.Controllers
 
         private string BuildeExcel()
         {
-            StringBuilder str = new StringBuilder();
-            str.Append("<table border=`" + "1px" + "`b>");
-            str.Append("<tr>");
-            str.Append("<td><b><font face=Arial Narrow size=3>ID Cliente</font></b></td>");
-            str.Append("<td><b><font face=Arial Narrow size=3>Nome</font></b></td>");
-            str.Append("<td><b><font face=Arial Narrow size=3>E-mail</font></b></td>");
-            str.Append("</tr>");
+            StringBuilder table = new StringBuilder();
+            table.Append("<table border=`" + "1px" + "`b>");
+            table.Append("<tr>");
+            table.Append("<td><b><font face=Arial Narrow size=3>ID Cliente</font></b></td>");
+            table.Append("<td><b><font face=Arial Narrow size=3>Nome</font></b></td>");
+            table.Append("<td><b><font face=Arial Narrow size=3>E-mail</font></b></td>");
+            table.Append("</tr>");
             foreach (var item in listCliente)
             {
-                str.Append("<tr>");
-                str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + item.IdCliente.ToString() + "</font></td>");
-                str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + item.Nome.ToString() + "</font></td>");
-                str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + item.Email.ToString() + "</font></td>");
-                str.Append("</tr>");
+                table.Append("<tr>");
+                table.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + item.IdCliente.ToString() + "</font></td>");
+                table.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + item.Nome.ToString() + "</font></td>");
+                table.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + item.Email.ToString() + "</font></td>");
+                table.Append("</tr>");
             }
-            str.Append("</table>");
-            byte[] temp = System.Text.Encoding.UTF8.GetBytes(str.ToString());
+            table.Append("</table>");
+            byte[] temp = System.Text.Encoding.UTF8.GetBytes(table.ToString());
             return System.Convert.ToBase64String(temp);
 
         }
