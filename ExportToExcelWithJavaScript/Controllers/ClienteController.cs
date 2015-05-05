@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FizzWare.NBuilder;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -16,6 +17,9 @@ namespace WebAPIExportExcel.Controllers
         [HttpGet]
         public IEnumerable<Cliente> GetClientes()
         {
+            if (listCliente.Count() == 0)
+                listCliente = Builder<Cliente>.CreateListOfSize(4).Build();
+
             return listCliente;
         }
 

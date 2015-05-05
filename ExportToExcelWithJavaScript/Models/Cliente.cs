@@ -2,6 +2,7 @@
 
 namespace WebAPIExportExcel.Models
 {
+    [Serializable]
     public class Cliente
     {
         public int IdCliente { get; set; }
